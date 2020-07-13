@@ -10,7 +10,13 @@
   "dependencies": {
     "axios": "^0.18.0",
     "core-js": "^3.6.5",
+    "firebase": "^7.2.2",
+    "identicon.js": "^2.3.3",
+    "js-sha256": "^0.9.0",
+    "moment": "^2.24.0",
+    "timeago.js": "^4.0.0-beta.2",
     "vue": "^2.6.11",
+    "vue-axios": "^2.1.4",
     "vue-router": "^3.2.0",
     "vuetify": "^2.2.11",
     "vuex": "^3.4.0"
