@@ -6,7 +6,7 @@
       clipped
     >
       <v-list dense>
-        <template v-if="isConnected">
+        <!-- <template v-if="isConnected"> -->
           <template v-for="item in items"> 
             <router-link :to="item.route" :key="item.text">
               <v-list-item>
@@ -28,12 +28,12 @@
           <router-link to="/profile">
             <v-list-item>
               <v-list-item-avatar>
-                <img :src="getProfileImg" />
+                <!-- <img :src="getProfileImg" /> -->
               </v-list-item-avatar>
-              <v-list-item-title v-text="nickname" style="text-align: left; color:#acb3be; font-size: 12px;"></v-list-item-title>
+              <!-- <v-list-item-title v-text="nickname" style="text-align: left; color:#acb3be; font-size: 12px;"></v-list-item-title> -->
             </v-list-item>
           </router-link>
-        </template>
+        <!-- </template> -->
 
         <v-divider class="mt-4"></v-divider>
         
@@ -113,13 +113,13 @@
         'profile'
       ]),
 
-      nickname () {
-        return this.profile.name
-      },
+      // nickname () {
+      //   return this.profile.name
+      // },
 
-      getProfileImg () {
-        return getIdenticon(this.profile.name)
-      }
+      // getProfileImg () {
+      //   return getIdenticon(this.profile.name)
+      // }
     },    
 
     methods: {

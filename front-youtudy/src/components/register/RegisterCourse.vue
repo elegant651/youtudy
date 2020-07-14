@@ -36,15 +36,37 @@
 
 <script>
 import firebase from "firebase"
+const ysearch = require('youtube-search')
 
 export default {
   data: () => ({
     snackbar: false,
     errorTxt: '',
     
+    ttitle: '',
+    category: ''
   }),
 
+  created() {    
+    this.videoSearch('Surfing');
+  },
+
   methods: {
+    videoSearch(searchTerm) {
+      const opts = {
+        maxResults:10,
+        key: process.env.VUE_APP_YOUTUBE_DATA_API_KEY
+      }
+
+      ysearch(searchTerm, opts, (err, results) => {
+        if (err) {
+          return console.error(err)
+        }
+
+        console.dir(results)
+      })
+    },
+
     validate () {
       if (!this.$refs.form.validate()) {
       	this.errorTxt = 'Please confirm again'
