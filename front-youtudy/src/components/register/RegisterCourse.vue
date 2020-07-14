@@ -55,6 +55,8 @@ export default {
     videoSearch(searchTerm) {
       const opts = {
         maxResults:10,
+        eventType: 'completed',
+        type: 'video',
         key: process.env.VUE_APP_YOUTUBE_DATA_API_KEY
       }
 
