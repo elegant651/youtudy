@@ -17,8 +17,36 @@
       required
     ></v-text-field>
 
-    <v-btn outlined class="btnSubmit mr-4" @click="validate">등록완료</v-btn>
+    <v-text-field
+      v-model="link"      
+      label="Link"
+      disabled
+      solo
+      required
+    ></v-text-field>
+
+    <v-btn @click="addVideo">Add video</v-btn>
+
+    <div>
+      <v-btn outlined class="btnSubmit mr-4" @click="validate">등록완료</v-btn>
+    </div>
   </v-form>
+
+  <v-dialog v-model="dlogRegisterVideo" persistent max-width="450">
+      <v-card>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn
+            class="btnClose"
+              color="#000"
+              text
+              @click="dlogRegisterVideo = false">
+            X
+          </v-btn>
+        </v-card-actions>
+        <RegisterVideo v-on:register-video="onRegisterVideo" />
+      </v-card>
+    </v-dialog>
 
   <v-snackbar
       v-model="snackbar" top>
@@ -36,37 +64,34 @@
 
 <script>
 import firebase from "firebase"
-const ysearch = require('youtube-search')
+import RegisterVideo from '@/components/register/RegisterVideo'
 
 export default {
   data: () => ({
     snackbar: false,
     errorTxt: '',
+    dlogRegisterVideo: false,
     
     ttitle: '',
-    category: ''
+    category: '',
+    link: ''
   }),
 
+  components: {
+    RegisterVideo
+  },
+
   created() {    
-    this.videoSearch('Surfing');
+    
   },
 
   methods: {
-    videoSearch(searchTerm) {
-      const opts = {
-        maxResults:10,
-        eventType: 'completed',
-        type: 'video',
-        key: process.env.VUE_APP_YOUTUBE_DATA_API_KEY
-      }
-
-      ysearch(searchTerm, opts, (err, results) => {
-        if (err) {
-          return console.error(err)
-        }
-
-        console.dir(results)
-      })
+    addVideo () {
+      this.dlogRegisterVideo = true
+    },
+    onRegisterVideo (link) {
+      this.dlogRegisterVideo = false
+      this.link = link
     },
 
     validate () {

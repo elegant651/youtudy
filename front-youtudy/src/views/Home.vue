@@ -1,14 +1,16 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">    
+    <PublicList />
   </div>
 </template>
 
 <script>
 
+import PublicList from '@/components/home/PublicList'
 export default {
   name: 'Home',
-  components: { 
+  components: {
+    PublicList
   }
 }
 </script>
