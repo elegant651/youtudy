@@ -36,7 +36,7 @@ Vue.use(VueRouter)
     component: () => import('../views/Register.vue')
   },
   {
-    path: '/detail-course',
+    path: '/detail-course/:id',
     name: 'detail-course',
     component: () => import('../views/DetailCourse.vue')
   }
