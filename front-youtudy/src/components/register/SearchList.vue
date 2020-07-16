@@ -53,7 +53,7 @@ export default {
 
     onSelectCard(video) {
       console.log(video)
-      this.$emit('select-link', video.link)
+      this.$emit('select-link', video.link, video)
     }
   }
 };
