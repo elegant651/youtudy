@@ -1,7 +1,7 @@
 <template>
   <div class="field">
     <div>
-      <v-text-field type="text" v-model="searchTerm" @input="searchTermChange" />
+      <v-text-field type="text" label="키워드 검색 또는 유튜브 링크" v-model="searchTerm" @input="searchTermChange" />
       <!-- <v-btn outlined class="btnSubmit mr-4" @click="search">검색</v-btn> -->
       <div>
         <div v-for="video in videos" :key="video.etag">
@@ -35,8 +35,7 @@ export default {
       console.log(this.searchTerm)
       
       const opts = {
-        maxResults: 5,
-        eventType: 'completed',
+        maxResults: 5,        
         type: 'video',
         key: process.env.VUE_APP_YOUTUBE_DATA_API_KEY
       }

@@ -146,6 +146,18 @@ export default {
         return false
       }
 
+      if(this.category.length==0 || this.ttitle.length==0) {
+        this.errorTxt = '필드를 확인해주세요.'
+        this.snackbar = true
+        return false
+      }
+
+      if(this.videos1.length==0) {
+        this.errorTxt = '영상을 1주차에 한 개 이상 세팅해주세요.'
+        this.snackbar = true
+        return false
+      }
+
       this.submit()
     },
 
@@ -156,24 +168,32 @@ export default {
       const vd1 = this.videos1.map(video => {
         const obj = new Object()
         obj.video_id = video.id
+        obj.title = video.title
+        obj.thumbnail = video.thumbnails.medium.url
         return obj
       })
 
       const vd2 = this.videos2.map(video => {
         const obj = new Object()
         obj.video_id = video.id
+        obj.title = video.title
+        obj.thumbnail = video.thumbnails.medium.url
         return obj
       })
 
       const vd3 = this.videos3.map(video => {
         const obj = new Object()
         obj.video_id = video.id
+        obj.title = video.title
+        obj.thumbnail = video.thumbnails.medium.url
         return obj
       })
 
       const vd4 = this.videos4.map(video => {
         const obj = new Object()
         obj.video_id = video.id
+        obj.title = video.title
+        obj.thumbnail = video.thumbnails.medium.url
         return obj
       })
 
@@ -192,6 +212,8 @@ export default {
         register_id: 'register_id',
         register_name: 'cherryboy',
         registered_at: new Date(),
+        thumbnail: this.videos1[0].thumbnails.medium.url,
+        firstVideoId: this.videos1[0].id,
         schedule
       })
 

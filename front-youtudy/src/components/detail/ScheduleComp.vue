@@ -1,30 +1,80 @@
 <template>
   <div>
-    <v-card class="cardContent mx-auto mb-4" max-width="400" max-height="400"
-      v-for="item in items" :key="item.index">
-      <v-list-item>      
-        <v-list-item-content>
-          <v-list-item-title>{{item.title}}</v-list-item-title>
-          <v-list-item-subtitle>{{item.username}}</v-list-item-subtitle>
-        </v-list-item-content>
-        <div class="flex-grow-1"></div>
-      </v-list-item>
+    <div>1주차</div>    
+    <div v-for="video in videos1" :key="video.video_id">
+      <v-card @click="selectVideo(video.video_id)">
+        <v-img :src="video.thumbnail" width="150" />
+        <div>{{video.title}}</div>
+      </v-card>
+    </div>
 
-      <p class="ma-4">{{item.content}}</p>
-    </v-card>
+    <div>2주차</div> 
+    <div v-for="video in videos2" :key="video.video_id">
+      <v-card @click="selectVideo(video.video_id)">
+        <v-img :src="video.thumbnail" width="150" />
+        <div>{{video.title}}</div>
+      </v-card>
+    </div>
+
+    <div>3주차</div> 
+    <div v-for="video in videos3" :key="video.video_id">
+      <v-card @click="selectVideo(video.video_id)">
+        <v-img :src="video.thumbnail" width="150" />
+        <div>{{video.title}}</div>
+      </v-card>
+    </div>
+
+    <div>4주차</div>
+    <div v-for="video in videos4" :key="video.video_id">
+      <v-card @click="selectVideo(video.video_id)">
+        <v-img :src="video.thumbnail" width="150" />
+        <div>{{video.title}}</div>
+      </v-card>
+    </div>
   </div>
 </template>
 
 <script>
 export default {
   props: {
-    channelData: Object
+    schedule: Object,   
+  },
+  watch: {
+    schedule: function (newItem) {
+      if(newItem) {
+        this.getList(newItem)
+      }      
+    }
   },
   data() {
     return {
-      items: []
+      videos1: [],
+      videos2: [],
+      videos3: [],
+      videos4: []
     }    
   },
+
+  methods: {
+    getList(schedule) {
+      for(const [key, val] of Object.entries(schedule)) {
+        // console.log(key, val)
+        if (key==1) {
+          this.videos1.push(...val)
+        } else if (key==2) {
+          this.videos2.push(...val)
+        } else if (key==3) {
+          this.videos3.push(...val)
+        } else if (key==4) {
+          this.videos4.push(...val)
+        }
+      } 
+    },
+
+    selectVideo(video_id) { 
+      this.$emit('select-video', video_id)
+    }
+  }
 };
 </script>
 

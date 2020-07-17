@@ -4,7 +4,8 @@
 
   <v-text-field
     v-model="link"
-    label="유튜브 링크 주소"
+    label="선택 링크 주소"
+    disabled
     solo
     required
   ></v-text-field>
@@ -50,18 +51,12 @@ export default {
       this.video = video
     },
 
-    validate () {
+    async validate () {
       if (this.link.length < 10) {
       	this.errorTxt = '링크를 적어주세요'
         this.snackbar = true
         return false
-      }
-
-      if(this.video == null) {
-        //retrieve video info from url
-      }
-
-      //verify youtube url
+      }      
 
       this.submit()
     },
@@ -94,6 +89,8 @@ export default {
     
     completeRegistered() {
       this.isLoading = false
+
+      this.link = ""
 
       console.log(this.video)
       this.$emit('register-video', this.video)
