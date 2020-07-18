@@ -1,59 +1,90 @@
 <template>
 <div>  
   <v-form
-    ref="form"
+    ref="form"    
     class="mt-2"
     >
     <v-text-field
+      class="tfInput"
       v-model="ttitle"      
-      label="Title"
+      label="제목"
       solo
       required
     ></v-text-field>
     <v-text-field
+      class="tfInput"
       v-model="category"      
-      label="Category"      
+      label="카테고리"      
       solo
       required
     ></v-text-field>
 
-    <div>1주차</div>
-    <v-btn @click="addVideo(1)">Add video</v-btn>
-    <div v-for="video in videos1" :key="video.id">
-      <v-card>
-        <v-img :src="video.thumbnails.medium.url" width="150" />
-        <div>{{video.title}}</div>
-      </v-card>
+    <h3>커리큘럼</h3>
+    <h4 class="mt-2">1주차 <span class="strSize">{{getStrSize(1)}}</span></h4>
+    <div class="btnAdd" @click="addVideo(1)"><img src="/img/ic-plus-circle.png"
+     srcset="/img/ic-plus-circle@2x.png 2x,
+             /img/ic-plus-circle@3x.png 3x"
+     class="ic-plus-circle"></div>
+    <div grid-list-md text-xs-center>
+      <v-layout row wrap>
+        <v-flex v-for="video in videos1" :key="video.id" xs6 md4>
+          <v-card class="cardVideo">
+            <v-img :src="video.thumbnails.medium.url" width="150" />
+            <div>{{video.title}}</div>
+          </v-card> 
+        </v-flex>
+      </v-layout>
     </div>
 
-    <div>2주차</div>
-    <v-btn @click="addVideo(2)">Add video</v-btn>
-    <div v-for="video in videos2" :key="video.id">
-      <v-card>
-        <v-img :src="video.thumbnails.medium.url" width="150" />
-        <div>{{video.title}}</div>
-      </v-card>
+    <h4 class="mt-3">2주차 <span class="strSize">{{getStrSize(2)}}</span></h4>
+    <div class="btnAdd"  @click="addVideo(2)"><img src="/img/ic-plus-circle.png"
+     srcset="/img/ic-plus-circle@2x.png 2x,
+             /img/ic-plus-circle@3x.png 3x"
+     class="ic-plus-circle"></div>
+    <div grid-list-md text-xs-center>
+      <v-layout row wrap>
+        <v-flex v-for="video in videos2" :key="video.id" xs6 md4>
+          <v-card class="cardVideo">
+            <v-img :src="video.thumbnails.medium.url" width="150" />
+            <div>{{video.title}}</div>
+          </v-card>
+        </v-flex>
+      </v-layout>
     </div>
 
-    <div>3주차</div>
-    <v-btn @click="addVideo(3)">Add video</v-btn>
-    <div v-for="video in videos3" :key="video.id">
-      <v-card>
-        <v-img :src="video.thumbnails.medium.url" width="150" />
-        <div>{{video.title}}</div>
-      </v-card>
+    <h4 class="mt-3">3주차 <span class="strSize">{{getStrSize(3)}}</span></h4>
+    <div class="btnAdd"  @click="addVideo(3)"><img src="/img/ic-plus-circle.png"
+     srcset="/img/ic-plus-circle@2x.png 2x,
+             /img/ic-plus-circle@3x.png 3x"
+     class="ic-plus-circle"></div>
+    <div grid-list-md text-xs-center>
+      <v-layout row wrap> 
+        <v-flex v-for="video in videos3" :key="video.id" xs6 md4>
+          <v-card class="cardVideo">
+            <v-img :src="video.thumbnails.medium.url" width="150" />
+            <div>{{video.title}}</div>
+          </v-card>
+        </v-flex>
+      </v-layout>
     </div>
 
-    <div>4주차</div>
-    <v-btn @click="addVideo(4)">Add video</v-btn>
-    <div v-for="video in videos4" :key="video.id">
-      <v-card>
-        <v-img :src="video.thumbnails.medium.url" width="150" />
-        <div>{{video.title}}</div>
-      </v-card>
+    <h4 class="mt-3">4주차 <span class="strSize">{{getStrSize(4)}}</span></h4>
+    <div class="btnAdd" @click="addVideo(4)"><img src="/img/ic-plus-circle.png"
+     srcset="/img/ic-plus-circle@2x.png 2x,
+             /img/ic-plus-circle@3x.png 3x"
+     class="ic-plus-circle"></div>
+    <div grid-list-md text-xs-center>
+      <v-layout row wrap> 
+        <v-flex v-for="video in videos4" :key="video.id" xs6 md4>
+          <v-card class="cardVideo">
+            <v-img :src="video.thumbnails.medium.url" width="150" />
+            <div>{{video.title}}</div>
+          </v-card>
+        </v-flex>
+      </v-layout>
     </div>
 
-    <div>
+    <div class="mt-3">
       <v-btn v-if="!isLoading" outlined class="btnSubmit mr-4" @click="validate">등록완료</v-btn>
       <v-progress-circular v-else indeterminate color="primary"></v-progress-circular>
     </div>
@@ -220,6 +251,20 @@ export default {
       this.isLoading = false
 
       this.$router.push('/')
+    },
+
+    getStrSize (index) {
+      let size = ""
+      if (index==1) {
+        size = this.videos1.length + "개"
+      } else if (index==2) {
+        size = this.videos2.length + "개"
+      } else if (index==3) {
+        size = this.videos3.length + "개"
+      } else if (index==4) {
+        size = this.videos4.length + "개"
+      }
+      return size
     }    
   }
 }
@@ -227,14 +272,56 @@ export default {
 </script>
 
 <style scoped>
+.cardVideo {
+  width: 156px;
+  height: 156px;
+  border-radius: 16px;
+  background-color: #c4c4c4;
+}
+
 .btnSubmit {
+  width: 328px;
+  height: 48px;
+  border-radius: 8px;
+  background-color: #000000;
+  font-size: 16px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #ffffff;
+}
+
+.tfInput {
+  width: 328px;
+  font-size: 16px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #979797;
+}
+
+.strSize {
   font-size: 14px;
   font-weight: normal;
   font-stretch: normal;
   font-style: normal;
   line-height: normal;
   letter-spacing: normal;
-  color: #0062ff;
-  text-transform: none;
+  color: #979797;
+}
+
+.btnAdd {
+  width: 141px;
+  height: 116px;
+  border-radius: 16px;
+  border: solid 1px #e5e5e5;
+  background-color: #f8f8f8;
+  cursor: pointer;
+  margin: 0 auto;
+  padding-top: 36px;
 }
 </style>

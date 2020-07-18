@@ -2,16 +2,16 @@
 <div>  
   <SearchList v-on:select-link="onSelectLink" />
 
-  <v-text-field
+  <!-- <v-text-field
     v-model="link"
     label="선택 링크 주소"
     disabled
     solo
     required
-  ></v-text-field>
+  ></v-text-field> -->
 
-  <v-btn v-if="!isLoading" outlined class="btnSubmit mr-4" @click="validate">등록하기</v-btn>
-  <v-progress-circular v-else indeterminate color="primary"></v-progress-circular>
+  <!-- <v-btn v-if="!isLoading" outlined class="btnSubmit mr-4" @click="validate">등록하기</v-btn>
+  <v-progress-circular v-else indeterminate color="primary"></v-progress-circular> -->
 
   <v-snackbar
       v-model="snackbar" top>
@@ -49,6 +49,8 @@ export default {
     onSelectLink (link, video) {
       this.link = link
       this.video = video
+
+      this.submit()
     },
 
     async validate () {

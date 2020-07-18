@@ -1,6 +1,6 @@
 <template>
 <div>
-  <v-btn class="btnGoogle" color="#fff" rounded @click="googleSignup">Sign up with Google</v-btn>
+  <v-btn class="btnGoogle" color="#fff" rounded @click="googleSignup">구글로 회원가입</v-btn>
 
   <v-divider class="mt-4 mb-4" />
   
@@ -14,7 +14,7 @@
       v-model="name"
       :counter="10"
       :rules="nameRules"
-      label="Name"
+      label="이름"
       solo
       required
     ></v-text-field>
@@ -28,7 +28,7 @@
     <v-text-field
       v-model="password"
       :rules="passwordRules"
-      label="Password"
+      label="비밀번호"
       type="password"
       solo
       required
@@ -36,12 +36,12 @@
     <v-text-field
       v-model="passwordConfirm"
       :rules="passwordRules"
-      label="Password Confirmation"
+      label="비밀번호 확인"
       type="password"
       solo
       required
     ></v-text-field>
-    <v-btn outlined class="btnSubmit mr-4" @click="validate">SIGN UP</v-btn>
+    <v-btn outlined class="btnSubmit mr-4" @click="validate">회원가입</v-btn>
   </v-form>
 
   <v-snackbar
@@ -102,14 +102,7 @@ export default {
       const userData = {
         email: email,
         name: name,
-        address: '',
-        photoUrl: '',
-        state: 0,
-        is_battle: false,
-        is_completed: false,
-        ing_battle_id: null,
-        ing_collection_id: null, 
-        num_feeds: 0,
+        state: 0,        
         created_at: new Date()
       }
 
@@ -131,8 +124,8 @@ export default {
       });
     },
 
-    facebookSignup () {
-      const provider = new firebase.auth.FacebookAuthProvider()
+    googleSignup () {
+      const provider = new firebase.auth.GoogleAuthProvider()
 
       firebase.auth().signInWithPopup(provider).then(async result => {
         const token = result.credential.accessToken

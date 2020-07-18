@@ -1,6 +1,6 @@
 <template>
 <div>  
-  <v-btn class="btnGoogle" color="#fff" rounded @click="googleLogin">Sign in with Google</v-btn>  
+  <v-btn class="btnGoogle" color="#fff" rounded @click="googleLogin">구글 로그인</v-btn>  
 
   <v-divider class="mt-4 mb-4" />
 
@@ -88,8 +88,8 @@ export default {
     },
 
 
-    facebookLogin () {
-      const provider = new firebase.auth.FacebookAuthProvider()
+    googleLogin () {
+      const provider = new firebase.auth.GoogleAuthProvider()
 
       firebase.auth().signInWithPopup(provider).then(result => {
         const token = result.credential.accessToken

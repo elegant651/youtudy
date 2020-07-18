@@ -3,10 +3,9 @@
     <v-container grid-list-md text-xs-center>
       <v-layout row wrap>
         <v-flex v-for="(course, index) in items" :key="index" xs6 md4>
-            <v-card @click="goToChannel(course)">
+            <v-card class="cardVideo" @click="goToChannel(course)">
               <v-img :src="course.thumbnail" height="200px"></v-img>            
-              <div class="ttitle">{{course.title}}</div>
-              <div class="category">{{course.category}}</div>
+              <div>{{course.title}}</div>
             </v-card>
         </v-flex>
       </v-layout>
@@ -34,12 +33,18 @@ export default {
       const db = firebase.firestore()
 
       this.items = []
-      await db.collection('public_courses').orderBy('registered_at', 'desc').limit(20).onSnapshot(async (snapshot) => {
-          snapshot.forEach((doc) => {
-            const courseInfo = {...doc.data(), id: doc.id}
+
+      const docRef =  db.collection('my_courses').doc("JVqj3TSL73ZndXFpOsDMOsk9WQ03")
+      docRef.get().then((doc) => {
+        if (doc.exists) {          
+          console.log('cc', doc.data())
+          const courses = doc.data().courses
+          for(const [key, val] of Object.entries(courses)) {            
+            const courseInfo = {...val, id: key}            
             this.items.push(courseInfo)
-          })
-        })      
+          }          
+        }
+      })    
     },
 
     goToChannel(course) {
@@ -49,13 +54,10 @@ export default {
 }
 </script>
 <style scoped>
-.ttitle {
-  font-size: 16px;
-  font-weight: bold;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: normal;
-  letter-spacing: normal;
-  color: #000000;
+.cardVideo {
+  width: 156px;
+  height: 156px;
+  border-radius: 16px;
+  background-color: #c4c4c4;
 }
 </style>

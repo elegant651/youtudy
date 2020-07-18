@@ -17,6 +17,36 @@ const config = {
 };
 firebase.initializeApp(config);
 
+const db = firebase.firestore()
+firebase.auth().onAuthStateChanged((user) => {
+  if (user) {    
+    // User is signed in.    
+    const email = user.email
+    const uid = user.uid
+    
+    const userRef = db.collection('users').doc(uid)
+    userRef.get().then((doc) => {
+      if(doc.exists) {
+        const data = doc.data()        
+        
+        const userObj = {
+          uid,
+          name: data.name,
+          email: data.email,
+          state: data.state
+        }      
+        store.commit('setMyProfile', userObj)
+        store.commit('setIsConnected', true)
+      }
+    })
+    // ...
+  } else {
+    // User is signed out.
+    // ...
+    console.log('not logged in')
+  }
+})
+
 Vue.config.productionTip = false
 Vue.prototype.$EventBus = new Vue()
 

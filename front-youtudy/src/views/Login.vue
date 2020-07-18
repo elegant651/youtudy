@@ -1,5 +1,26 @@
 <template>
-  <div class="about">
-    <h1>This is an login page</h1>
-  </div>
+<v-container fluid>
+  <v-row>
+    <v-col cols="12" sm="8" md="6">
+      <h2 class="mb-3">로그인</h2>
+      <LoginBox />
+    </v-col>
+  </v-row>
+</v-container>
 </template>
+
+<script>
+
+import LoginBox from '@/components/LoginBox'
+
+export default {
+  components: { LoginBox }
+}
+
+</script>
+
+<style scoped>
+.loginbox {
+  margin: 0 auto;
+}
+</style>

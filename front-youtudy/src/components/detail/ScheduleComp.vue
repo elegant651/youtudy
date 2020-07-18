@@ -1,35 +1,51 @@
 <template>
   <div>
-    <div>1주차</div>    
-    <div v-for="video in videos1" :key="video.video_id">
-      <v-card @click="selectVideo(video.video_id)">
-        <v-img :src="video.thumbnail" width="150" />
-        <div>{{video.title}}</div>
-      </v-card>
+    <h4>1주차 <span class="strSize">{{getStrSize(1)}}</span></h4>    
+    <div grid-list-md text-xs-center>
+      <v-layout row wrap>
+        <v-flex v-for="video in videos1" :key="video.video_id" xs6 md4>
+          <v-card class="cardVideo" @click="selectVideo(video.video_id)">
+            <v-img :src="video.thumbnail" width="150" />
+            <div>{{video.title}}</div>
+          </v-card>
+        </v-flex>
+      </v-layout>
     </div>
 
-    <div>2주차</div> 
-    <div v-for="video in videos2" :key="video.video_id">
-      <v-card @click="selectVideo(video.video_id)">
-        <v-img :src="video.thumbnail" width="150" />
-        <div>{{video.title}}</div>
-      </v-card>
+    <h4>2주차 <span class="strSize">{{getStrSize(2)}}</span></h4> 
+    <div grid-list-md text-xs-center>
+      <v-layout row wrap>
+        <v-flex v-for="video in videos2" :key="video.video_id" xs6 md4>
+          <v-card class="cardVideo" @click="selectVideo(video.video_id)">
+            <v-img :src="video.thumbnail" width="150" />
+            <div>{{video.title}}</div>
+          </v-card>
+        </v-flex>
+      </v-layout>
     </div>
 
-    <div>3주차</div> 
-    <div v-for="video in videos3" :key="video.video_id">
-      <v-card @click="selectVideo(video.video_id)">
-        <v-img :src="video.thumbnail" width="150" />
-        <div>{{video.title}}</div>
-      </v-card>
+    <h4>3주차 <span class="strSize">{{getStrSize(3)}}</span></h4> 
+    <div grid-list-md text-xs-center>
+      <v-layout row wrap>
+        <v-flex v-for="video in videos3" :key="video.video_id" xs6 md4>
+          <v-card class="cardVideo" @click="selectVideo(video.video_id)">
+            <v-img :src="video.thumbnail" width="150" />
+            <div>{{video.title}}</div>
+          </v-card>
+        </v-flex>
+      </v-layout>
     </div>
 
-    <div>4주차</div>
-    <div v-for="video in videos4" :key="video.video_id">
-      <v-card @click="selectVideo(video.video_id)">
-        <v-img :src="video.thumbnail" width="150" />
-        <div>{{video.title}}</div>
-      </v-card>
+    <h4>4주차 <span class="strSize">{{getStrSize(4)}}</span></h4>
+    <div grid-list-md text-xs-center>
+      <v-layout row wrap>
+        <v-flex v-for="video in videos4" :key="video.video_id" xs6 md4>
+          <v-card class="cardVideo" @click="selectVideo(video.video_id)">
+            <v-img :src="video.thumbnail" width="150" />
+            <div>{{video.title}}</div>
+          </v-card>
+        </v-flex>
+      </v-layout>
     </div>
   </div>
 </template>
@@ -73,11 +89,43 @@ export default {
 
     selectVideo(video_id) { 
       this.$emit('select-video', video_id)
-    }
+    },
+
+    getStrSize (index) {
+      let size = ""
+      if (index==1) {
+        size = this.videos1.length + "개"
+      } else if (index==2) {
+        size = this.videos2.length + "개"
+      } else if (index==3) {
+        size = this.videos3.length + "개"
+      } else if (index==4) {
+        size = this.videos4.length + "개"
+      }
+      return size
+    }    
   }
 };
 </script>
 
 <style scoped>
+
+.cardVideo {
+  width: 156px;
+  height: 156px;
+  border-radius: 16px;
+  background-color: #c4c4c4;
+  margin: 10px;
+}
+
+.strSize {
+  font-size: 14px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #979797;
+}
   
 </style>

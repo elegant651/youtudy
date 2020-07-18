@@ -1,15 +1,18 @@
 <template>
   <div class="field">
-    <div>
-      <v-text-field type="text" label="키워드 검색 또는 유튜브 링크" v-model="searchTerm" @input="searchTermChange" />
-      <!-- <v-btn outlined class="btnSubmit mr-4" @click="search">검색</v-btn> -->
+    <div class="ma-3">
+      <v-text-field type="text" label="키워드 검색 또는 유튜브 링크" v-model="searchTerm" @input="searchTermChange" />      
       <div>
-        <div v-for="video in videos" :key="video.etag">
-          <v-card @click="onSelectCard(video)">  
-            <v-img :src="video.thumbnails.medium.url" width="150" />
-            <div>{{video.title}}</div>
-          </v-card>            
-        </div>
+        <v-container grid-list-md text-xs-center>
+          <v-layout row wrap>
+            <v-flex v-for="video in videos" :key="video.etag" xs6 md4>
+              <v-card class="cardVideo" @click="onSelectCard(video)">  
+                <v-img :src="video.thumbnails.medium.url" width="150" />
+                <div class="ttitle">{{video.title}}</div>
+              </v-card>            
+            </v-flex>
+          </v-layout>
+        </v-container>        
       </div>
     </div> 
   </div>
@@ -35,7 +38,7 @@ export default {
       console.log(this.searchTerm)
       
       const opts = {
-        maxResults: 5,        
+        maxResults: 10,        
         type: 'video',
         key: process.env.VUE_APP_YOUTUBE_DATA_API_KEY
       }
@@ -58,5 +61,21 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+.cardVideo {
+  width: 156px;
+  height: 156px;
+  border-radius: 16px;
+  background-color: #c4c4c4;
+}
+
+.ttitle {
+  font-size: 16px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #000000;
+}
 </style>

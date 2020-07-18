@@ -24,16 +24,17 @@
 
           <v-divider class="mt-4"></v-divider>
 
-          <v-subheader class="mt-4 grey--text text--darken-1">MY PROFILE</v-subheader>
+          <template v-if="isConnected">
+          <v-subheader class="mt-4 grey--text text--darken-1">프로필</v-subheader>
           <router-link to="/profile">
             <v-list-item>
               <v-list-item-avatar>
-                <!-- <img :src="getProfileImg" /> -->
+                <img :src="getProfileImg" />
               </v-list-item-avatar>
-              <!-- <v-list-item-title v-text="nickname" style="text-align: left; color:#acb3be; font-size: 12px;"></v-list-item-title> -->
+              <v-list-item-title v-text="nickname" style="text-align: left; color:#acb3be; font-size: 12px;"></v-list-item-title>
             </v-list-item>
           </router-link>
-        <!-- </template> -->
+        </template>
 
         <v-divider class="mt-4"></v-divider>
         
@@ -43,7 +44,7 @@
               <v-list-item-action>
                 <img src="/img/ic-in.png" />
               </v-list-item-action>
-              <v-list-item-title class="menu_title">Sign Up</v-list-item-title>
+              <v-list-item-title class="menu_title">회원 가입</v-list-item-title>
             </v-list-item>
           </router-link>
 
@@ -52,7 +53,7 @@
               <v-list-item-action>
                 <img src="/img/ic-in.png" />
               </v-list-item-action>
-              <v-list-item-title class="menu_title">Log In</v-list-item-title>
+              <v-list-item-title class="menu_title">로그인</v-list-item-title>
             </v-list-item>
           </router-link>
         </template>
@@ -62,7 +63,7 @@
               <v-list-item-action>
                 <img src="/img/ic-logout.png" />
               </v-list-item-action>
-              <v-list-item-title class="menu_title logout" @click="logout">Log Out</v-list-item-title>
+              <v-list-item-title class="menu_title logout" @click="logout">로그아웃</v-list-item-title>
             </v-list-item>
           </router-link>
         </template>
@@ -75,7 +76,7 @@
       <v-spacer></v-spacer>
       
       
-      <v-btn outlined @click="goToProfile">학습 진행</v-btn>
+      <!-- <v-btn outlined @click="goToProfile">학습 진행</v-btn> -->
     </v-app-bar>
     <v-content>
       <v-container fluid class="fill-height">
@@ -102,28 +103,28 @@
     data: () => ({
       drawer: null,
       items: [
-        { icon: '', text: 'Home', route: '/' },
-        { icon: '', text: 'My course', route: '/my-course' },
-        { icon: '', text: 'Register', route: '/register' },        
+        { icon: '', text: '스터디 리스트', route: '/' },
+        { icon: '', text: '내 스터디', route: '/my-course' },
+        { icon: '', text: '스터디 등록', route: '/register' },
       ]      
     }),
     computed: {
-      ...mapState('profile', [        
+      ...mapState([
         'isConnected',        
         'profile'
       ]),
 
-      // nickname () {
-      //   return this.profile.name
-      // },
+      nickname () {        
+        return (this.profile) ? this.profile.name : ""
+      },
 
-      // getProfileImg () {
-      //   return getIdenticon(this.profile.name)
-      // }
+      getProfileImg () {
+        return (this.profile) ? getIdenticon(this.profile.name) : ''
+      }
     },    
 
     methods: {
-      ...mapMutations('profile', [        
+      ...mapMutations([        
         'setIsConnected'        
       ]),
       
@@ -163,7 +164,13 @@ a {
 }
 
 .logo {
-  line-height: 10px;
+  font-size: 20px;
+  font-weight: 500;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1;
+  letter-spacing: -0.6px;
+  color: rgba(0, 0, 0, 0.87);
 }
 
 .menu_title {
