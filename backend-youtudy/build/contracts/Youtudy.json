@@ -1,0 +1,97 @@
+{
+  "contractName": "Youtudy",
+  "abi": [],
+  "bytecode": "0x6080604052348015600f57600080fd5b50603580601d6000396000f3006080604052600080fd00a165627a7a723058201989dff6521ffb757ce3ec7447617cbdc6a6f762a3689a1fddf5a452a6b7679d0029",
+  "deployedBytecode": "0x6080604052600080fd00a165627a7a723058201989dff6521ffb757ce3ec7447617cbdc6a6f762a3689a1fddf5a452a6b7679d0029",
+  "sourceMap": "58:77:13:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;58:77:13;;;;;;;",
+  "deployedSourceMap": "58:77:13:-;;;;;",
+  "source": "// SPDX-License-Identifier: MIT\npragma solidity >=0.4.24;\ncontract Youtudy {\n\n//start course - staking\n\n//finish course - unstaking\n\n\n}",
+  "sourcePath": "/Users/willpark/Desktop/apollo/youtudy/backend-youtudy/contracts/Youtudy.sol",
+  "ast": {
+    "absolutePath": "/Users/willpark/Desktop/apollo/youtudy/backend-youtudy/contracts/Youtudy.sol",
+    "exportedSymbols": {
+      "Youtudy": [
+        1556
+      ]
+    },
+    "id": 1557,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 1555,
+        "literals": [
+          "solidity",
+          ">=",
+          "0.4",
+          ".24"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "32:25:13"
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 1556,
+        "linearizedBaseContracts": [
+          1556
+        ],
+        "name": "Youtudy",
+        "nodeType": "ContractDefinition",
+        "nodes": [],
+        "scope": 1557,
+        "src": "58:77:13"
+      }
+    ],
+    "src": "32:103:13"
+  },
+  "legacyAST": {
+    "absolutePath": "/Users/willpark/Desktop/apollo/youtudy/backend-youtudy/contracts/Youtudy.sol",
+    "exportedSymbols": {
+      "Youtudy": [
+        1556
+      ]
+    },
+    "id": 1557,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 1555,
+        "literals": [
+          "solidity",
+          ">=",
+          "0.4",
+          ".24"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "32:25:13"
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 1556,
+        "linearizedBaseContracts": [
+          1556
+        ],
+        "name": "Youtudy",
+        "nodeType": "ContractDefinition",
+        "nodes": [],
+        "scope": 1557,
+        "src": "58:77:13"
+      }
+    ],
+    "src": "32:103:13"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.4.25+commit.59dbf8f1.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "2.0.2",
+  "updatedAt": "2020-10-21T04:51:56.533Z"
+}
