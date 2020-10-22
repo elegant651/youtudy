@@ -2,12 +2,12 @@ pragma solidity >=0.4.25 <0.7.0;
 
 import "truffle/Assert.sol";
 import "truffle/DeployedAddresses.sol";
-import "../contracts/MetaCoin.sol";
+import "../contracts/YouCoin.sol";
 
 contract TestMetaCoin {
 
   function testInitialBalanceUsingDeployedContract() public {
-    MetaCoin meta = MetaCoin(DeployedAddresses.MetaCoin());
+    YouCoin meta = YouCoin(DeployedAddresses.YouCoin());
 
     uint expected = 10000;
 
@@ -15,7 +15,7 @@ contract TestMetaCoin {
   }
 
   function testInitialBalanceWithNewMetaCoin() public {
-    MetaCoin meta = new MetaCoin();
+    YouCoin meta = new YouCoin();
 
     uint expected = 10000;
 

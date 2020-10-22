@@ -1,4 +1,4 @@
-const MetaCoin = artifacts.require("MetaCoin");
+const MetaCoin = artifacts.require("YouCoin");
 
 contract('MetaCoin', (accounts) => {
   it('should put 10000 MetaCoin in the first account', async () => {
