@@ -7,20 +7,20 @@
     <v-text-field
       class="tfInput"
       v-model="ttitle"      
-      label="제목"
+      label="Title"
       solo
       required
     ></v-text-field>
     <v-text-field
       class="tfInput"
       v-model="category"      
-      label="카테고리"      
+      label="Category"      
       solo
       required
     ></v-text-field>
 
-    <h3>커리큘럼</h3>
-    <h4 class="mt-2">1주차 <span class="strSize">{{getStrSize(1)}}</span></h4>
+    <h3>curriculum</h3>
+    <h4 class="mt-2">1 week <span class="strSize">{{getStrSize(1)}}</span></h4>
     <div class="btnAdd" @click="addVideo(1)"><img src="/img/ic-plus-circle.png"
      srcset="/img/ic-plus-circle@2x.png 2x,
              /img/ic-plus-circle@3x.png 3x"
@@ -36,7 +36,7 @@
       </v-layout>
     </div>
 
-    <h4 class="mt-3">2주차 <span class="strSize">{{getStrSize(2)}}</span></h4>
+    <h4 class="mt-3">2 week <span class="strSize">{{getStrSize(2)}}</span></h4>
     <div class="btnAdd"  @click="addVideo(2)"><img src="/img/ic-plus-circle.png"
      srcset="/img/ic-plus-circle@2x.png 2x,
              /img/ic-plus-circle@3x.png 3x"
@@ -52,7 +52,7 @@
       </v-layout>
     </div>
 
-    <h4 class="mt-3">3주차 <span class="strSize">{{getStrSize(3)}}</span></h4>
+    <h4 class="mt-3">3 week <span class="strSize">{{getStrSize(3)}}</span></h4>
     <div class="btnAdd"  @click="addVideo(3)"><img src="/img/ic-plus-circle.png"
      srcset="/img/ic-plus-circle@2x.png 2x,
              /img/ic-plus-circle@3x.png 3x"
@@ -68,7 +68,7 @@
       </v-layout>
     </div>
 
-    <h4 class="mt-3">4주차 <span class="strSize">{{getStrSize(4)}}</span></h4>
+    <h4 class="mt-3">4 week <span class="strSize">{{getStrSize(4)}}</span></h4>
     <div class="btnAdd" @click="addVideo(4)"><img src="/img/ic-plus-circle.png"
      srcset="/img/ic-plus-circle@2x.png 2x,
              /img/ic-plus-circle@3x.png 3x"
@@ -178,13 +178,13 @@ export default {
       }
 
       if(this.category.length==0 || this.ttitle.length==0) {
-        this.errorTxt = '필드를 확인해주세요.'
+        this.errorTxt = 'Please confirm the field'
         this.snackbar = true
         return false
       }
 
       if(this.videos1.length==0) {
-        this.errorTxt = '영상을 1주차에 한 개 이상 세팅해주세요.'
+        this.errorTxt = 'You should set the one video per week at least.'
         this.snackbar = true
         return false
       }
@@ -256,13 +256,13 @@ export default {
     getStrSize (index) {
       let size = ""
       if (index==1) {
-        size = this.videos1.length + "개"
+        size = this.videos1.length
       } else if (index==2) {
-        size = this.videos2.length + "개"
+        size = this.videos2.length
       } else if (index==3) {
-        size = this.videos3.length + "개"
+        size = this.videos3.length
       } else if (index==4) {
-        size = this.videos4.length + "개"
+        size = this.videos4.length
       }
       return size
     }    

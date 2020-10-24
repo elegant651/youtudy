@@ -25,7 +25,7 @@
           <v-divider class="mt-4"></v-divider>
 
           <template v-if="isConnected">
-          <v-subheader class="mt-4 grey--text text--darken-1">프로필</v-subheader>
+          <v-subheader class="mt-4 grey--text text--darken-1">Profile</v-subheader>
           <router-link to="/profile">
             <v-list-item>
               <v-list-item-avatar>
@@ -44,7 +44,7 @@
               <v-list-item-action>
                 <img src="/img/ic-in.png" />
               </v-list-item-action>
-              <v-list-item-title class="menu_title">회원 가입</v-list-item-title>
+              <v-list-item-title class="menu_title">Sign Up</v-list-item-title>
             </v-list-item>
           </router-link>
 
@@ -53,7 +53,7 @@
               <v-list-item-action>
                 <img src="/img/ic-in.png" />
               </v-list-item-action>
-              <v-list-item-title class="menu_title">로그인</v-list-item-title>
+              <v-list-item-title class="menu_title">Sign In</v-list-item-title>
             </v-list-item>
           </router-link>
         </template>
@@ -63,7 +63,7 @@
               <v-list-item-action>
                 <img src="/img/ic-logout.png" />
               </v-list-item-action>
-              <v-list-item-title class="menu_title logout" @click="logout">로그아웃</v-list-item-title>
+              <v-list-item-title class="menu_title logout" @click="logout">Sign Out</v-list-item-title>
             </v-list-item>
           </router-link>
         </template>
@@ -103,9 +103,9 @@
     data: () => ({
       drawer: null,
       items: [
-        { icon: '', text: '스터디 리스트', route: '/' },
-        { icon: '', text: '내 스터디', route: '/my-course' },
-        { icon: '', text: '스터디 등록', route: '/register' },
+        { icon: '', text: 'Course List', route: '/' },
+        { icon: '', text: 'My Course', route: '/my-course' },
+        { icon: '', text: 'Register Course', route: '/register' },
       ]      
     }),
     computed: {

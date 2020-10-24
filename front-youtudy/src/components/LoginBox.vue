@@ -1,6 +1,6 @@
 <template>
 <div>  
-  <v-btn class="btnGoogle" color="#fff" rounded @click="googleLogin">구글 로그인</v-btn>  
+  <v-btn class="btnGoogle" color="#fff" rounded @click="googleLogin">Google Signin</v-btn>  
 
   <v-divider class="mt-4 mb-4" />
 
@@ -24,7 +24,7 @@
       required
     ></v-text-field>
 
-    <v-btn outlined class="btnSubmit mr-4" @click="validate">LOG IN</v-btn>
+    <v-btn outlined class="btnSubmit mr-4" @click="validate">SIGN IN</v-btn>
   </v-form>
 
   <v-snackbar

@@ -1,6 +1,6 @@
 <template>
 <div>
-  <v-btn class="btnGoogle" color="#fff" rounded @click="googleSignup">구글로 회원가입</v-btn>
+  <v-btn class="btnGoogle" color="#fff" rounded @click="googleSignup">Google Sign Up</v-btn>
 
   <v-divider class="mt-4 mb-4" />
   
@@ -14,7 +14,7 @@
       v-model="name"
       :counter="10"
       :rules="nameRules"
-      label="이름"
+      label="Name"
       solo
       required
     ></v-text-field>
@@ -28,7 +28,7 @@
     <v-text-field
       v-model="password"
       :rules="passwordRules"
-      label="비밀번호"
+      label="Password"
       type="password"
       solo
       required
@@ -36,12 +36,12 @@
     <v-text-field
       v-model="passwordConfirm"
       :rules="passwordRules"
-      label="비밀번호 확인"
+      label="Password Confirmation"
       type="password"
       solo
       required
     ></v-text-field>
-    <v-btn outlined class="btnSubmit mr-4" @click="validate">회원가입</v-btn>
+    <v-btn outlined class="btnSubmit mr-4" @click="validate">SIGN UP</v-btn>
   </v-form>
 
   <v-snackbar

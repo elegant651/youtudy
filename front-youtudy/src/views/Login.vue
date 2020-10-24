@@ -2,7 +2,7 @@
 <v-container fluid>
   <v-row>
     <v-col cols="12" sm="8" md="6">
-      <h2 class="mb-3">로그인</h2>
+      <h2 class="mb-3">Sign In</h2>
       <LoginBox />
     </v-col>
   </v-row>
