@@ -3,13 +3,13 @@ const Youtudy = require('./contracts/Youtudy')
 const YouCoin = require('./contracts/YouCoin')
 
 export default {
-	BADGE_CA: Badge.deployedAddress,
-	YOUTUDY_CA: Youtudy.deployedAddress,
-	YOUCOIN_CA: YouCoin.deployedAddress,
+	BADGE_CA: Badge.networks["80001"].address,
+	YOUTUDY_CA: Youtudy.networks["80001"].address,
+	YOUCOIN_CA: YouCoin.networks["80001"].address,
 
-	BADGE_ABI: Badge.abiDefinition,
-	YOUTUDY_ABI: Youtudy.abiDefinition,
-	YOUCOIN_ABI: YouCoin.deployedAddress,	
+	BADGE_ABI: Badge.abi,
+	YOUTUDY_ABI: Youtudy.abi,
+	YOUCOIN_ABI: YouCoin.abi,
 
 	GAS_AMOUNT: 5000000
 }

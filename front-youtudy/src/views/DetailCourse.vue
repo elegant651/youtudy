@@ -7,10 +7,11 @@
     <v-progress-linear
       color="blue-grey"
       height="10"
-      value="20"
+      value="100"
       striped
     ></v-progress-linear>
-    <div class="progressVal">25% 완료</div>
+    <div class="progressVal">100%</div>
+    <v-btn v-if="!isLoading" outlined class="btnSubmit mr-4" @click="getBadge()">Get Badge</v-btn>
 
     <div class="mt-3 mb-6">
       <div class="ttitle">{{channelTitle}}</div>
@@ -20,7 +21,7 @@
 
     <ScheduleComp :schedule="channelSchedule" v-on:select-video="onSelectVideo" />
 
-    <v-btn class="btnAction mt-3" rounded outlined @click="actionRegister">스터디 참여</v-btn>
+    <v-btn class="btnAction mt-3" rounded outlined @click="actionRegister">Join Course</v-btn>    
 
     <v-snackbar
       v-model="snackbar" top>
@@ -50,10 +51,14 @@ export default {
 
   data() {
     return {
+      channelId: null,
       channelData: null,
       selVideo: null,
       snackbar: false,
-      msgTxt: ''
+      msgTxt: '',
+      isLoading: false,
+      ciBadge: null,
+      address: null
       // {
       //   id: 's-YsO84qYak',
       //   title: 'A State Of Trance Episode 830 (#ASOT830)',
@@ -66,7 +71,8 @@ export default {
     }
   },
 
-  computed: {
+  computed: {    
+
     channelTitle () {
       return this.channelData ? this.channelData.title : ""
     },
@@ -90,6 +96,9 @@ export default {
 
   async mounted() {
     const id = this.$route.params.id 
+    this.channelId = id
+    this.address = await this.$getDefaultAccount()
+    this.ciBadge = new this.$web3.eth.Contract(this.$config.BADGE_ABI, this.$config.BADGE_CA)
     
     await this.getData(id)
   },
@@ -135,6 +144,28 @@ export default {
       this.msgTxt = '참여가 완료되었습니다.'
 
       this.$router.push('/my-course')
+    },
+
+    async getBadge() {
+      const badgeName = `${this.channelId}_${this.channelTitle.substring(0, 8).replace(/\s+/g, '')}`
+      console.log(badgeName)
+      
+      try {
+        this.isLoading = true
+
+        await this.ciBadge.methods.createBadge(badgeName)
+        .send({from: this.address, gas: this.$config.GAS_AMOUNT})
+        .on('transactionHash', (transactionHash) => {
+          this.isLoading = false        
+          alert("Creation completed...! tx:"+transactionHash)
+        })
+        .on('error', (error, receipt) => {
+          this.isLoading = false
+          alert(error)
+        });
+      } catch (e) {
+        this.isLoading = false
+      }
     }
   }  
 }

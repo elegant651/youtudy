@@ -5,8 +5,7 @@
         <v-flex v-for="(course, index) in items" :key="index" xs6 md4>
             <v-card class="cardVideo" @click="goToChannel(course)">
               <v-img :src="course.thumbnail" height="200px"></v-img>            
-              <div>{{course.title}}</div>
-              <v-btn v-if="!isLoading" outlined class="btnSubmit mr-4" @click="getBadge">Get Badge</v-btn>
+              <div>{{course.title}}</div>              
             </v-card>
         </v-flex>
       </v-layout>
@@ -19,14 +18,13 @@ import firebase from "firebase"
 export default {
   data() {
     return {
-      items: [],
-      isLoading: false
+      items: []      
     }    
   },
   components: { 
   },
 
-  async mounted() {
+  async mounted() {    
     await this.getCourses()
   },
 
@@ -51,11 +49,7 @@ export default {
 
     goToChannel(course) {
       this.$emit('go-channel', course)
-    },
-
-    getBadge() {
-      
-    }
+    },    
   }
 }
 </script>

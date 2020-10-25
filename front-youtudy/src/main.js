@@ -55,20 +55,20 @@ Vue.mixin({
     
     if (window.ethereum) {
       this.$web3 = new Web3(window.ethereum)
-    }
-        
-    this.$config = Config
+    }     
 
-    try {
-      if (window.ethereum.isStatus) {
-        console.log('status app found')
-      } else {
-        console.log('no Status app found')
-      }     
-    } catch (error) {
-      console.error('e', error)
+    this.$getDefaultAccount = () => {
+    	return new Promise((resolve, reject) => {
+    		this.$web3.eth.getAccounts((err, data) => {
+    			if(!err) resolve(data[0])
+    			reject(err)
+    		})
+    	})
     }
+
+    this.$config = Config    
   }
+  
 })
 
 Vue.config.productionTip = false

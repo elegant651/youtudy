@@ -112,7 +112,7 @@ export default {
 
 .cardVideo {
   width: 156px;
-  height: 156px;
+  height: 186px;
   border-radius: 16px;
   background-color: #c4c4c4;
   margin: 10px;

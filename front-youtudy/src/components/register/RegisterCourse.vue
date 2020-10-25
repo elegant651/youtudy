@@ -139,15 +139,19 @@ export default {
     videos1: [],
     videos2: [],
     videos3: [],
-    videos4: []
+    videos4: [],
+
+    address: null,
+    ciYoutudy: null
   }),
 
   components: {
     RegisterVideo
   },
 
-  created() {    
-    
+  async mounted() {
+    this.address = await this.$getDefaultAccount()
+    this.ciYoutudy = new this.$web3.eth.Contract(this.$config.YOUTUDY_ABI, this.$config.YOUTUDY_CA)
   },
 
   methods: {
