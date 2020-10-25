@@ -198,7 +198,7 @@ export default {
 
     async submit () {
       const db = firebase.firestore()
-      this.isLoading = true
+      this.isLoading = true      
       
       const vd1 = this.videos1.map(video => {
         const obj = new Object()
@@ -240,6 +240,21 @@ export default {
       }
 
       console.log(schedule)       
+
+      try {
+        const price = 1
+        await this.ciYoutudy.methods.createCourse(this.title, schedule, price)
+        .send({from: this.address, gas: this.$config.GAS_AMOUNT})
+          .on('transactionHash', (transactionHash) => {            
+            console.log("Creation completed...! tx:"+transactionHash)
+          })      
+          .on('error', (error, receipt) => {
+            console.error(error)            
+          });
+      } catch (e) {
+        conso.error(e)
+      }
+      
 
       await db.collection("public_courses").add({
         title: this.ttitle,
