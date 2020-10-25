@@ -19,7 +19,7 @@
       required
     ></v-text-field>
 
-    <h3>curriculum</h3>
+    <h3>Curriculum</h3>
     <h4 class="mt-2">1 week <span class="strSize">{{getStrSize(1)}}</span></h4>
     <div class="btnAdd" @click="addVideo(1)"><img src="/img/ic-plus-circle.png"
      srcset="/img/ic-plus-circle@2x.png 2x,
@@ -85,7 +85,7 @@
     </div>
 
     <div class="mt-3">
-      <v-btn v-if="!isLoading" outlined class="btnSubmit mr-4" @click="validate">등록완료</v-btn>
+      <v-btn v-if="!isLoading" outlined class="btnSubmit mr-4" @click="validate">Register</v-btn>
       <v-progress-circular v-else indeterminate color="primary"></v-progress-circular>
     </div>
   </v-form>

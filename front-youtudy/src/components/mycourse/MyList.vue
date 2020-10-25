@@ -6,6 +6,7 @@
             <v-card class="cardVideo" @click="goToChannel(course)">
               <v-img :src="course.thumbnail" height="200px"></v-img>            
               <div>{{course.title}}</div>
+              <v-btn v-if="!isLoading" outlined class="btnSubmit mr-4" @click="getBadge">Get Badge</v-btn>
             </v-card>
         </v-flex>
       </v-layout>
@@ -18,7 +19,8 @@ import firebase from "firebase"
 export default {
   data() {
     return {
-      items: []
+      items: [],
+      isLoading: false
     }    
   },
   components: { 
@@ -49,6 +51,10 @@ export default {
 
     goToChannel(course) {
       this.$emit('go-channel', course)
+    },
+
+    getBadge() {
+      
     }
   }
 }

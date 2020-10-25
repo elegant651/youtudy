@@ -1,7 +1,7 @@
 <template>
   <div class="field">
     <div class="ma-3">
-      <v-text-field type="text" label="키워드 검색 또는 유튜브 링크" v-model="searchTerm" @input="searchTermChange" />      
+      <v-text-field type="text" label="Keyword or Youtube Link" v-model="searchTerm" @input="searchTermChange" />      
       <div>
         <v-container grid-list-md text-xs-center>
           <v-layout row wrap>
