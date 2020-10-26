@@ -11,7 +11,7 @@ It is a service that allows you to create a learning curriculum with YouTube vid
 ```
 
 ## Utilization
-
+![utilization_img](./utilization.png)
 
 ## Tech stack
 ```
