@@ -11,7 +11,8 @@
       striped
     ></v-progress-linear>
     <div class="progressVal">100%</div>
-    <v-btn v-if="!isLoading" outlined class="btnSubmit mr-4" @click="getBadge()">Get Badge</v-btn>
+    <v-btn v-if="!hasBadge" outlined class="btnSubmit mr-4" @click="getBadge()">Get Badge</v-btn>
+    <v-chip v-else class="ma-2">{{badgeMsg}}</v-chip>
 
     <div class="mt-3 mb-6">
       <div class="ttitle">{{channelTitle}}</div>
@@ -39,6 +40,7 @@
 
 <script>
 import {format as tformat} from 'timeago.js'
+import { mapState } from 'vuex'
 import firebase from "firebase"
 import DetailComp from '@/components/detail/DetailComp'
 import ScheduleComp from '@/components/detail/ScheduleComp'
@@ -58,7 +60,8 @@ export default {
       msgTxt: '',
       isLoading: false,
       ciBadge: null,
-      address: null
+      hasBadge: false,
+      badgeMsg: ''
       // {
       //   id: 's-YsO84qYak',
       //   title: 'A State Of Trance Episode 830 (#ASOT830)',
@@ -71,7 +74,10 @@ export default {
     }
   },
 
-  computed: {    
+  computed: {
+    ...mapState('wallet', [
+      'address'
+    ]),
 
     channelTitle () {
       return this.channelData ? this.channelData.title : ""
@@ -96,9 +102,9 @@ export default {
 
   async mounted() {
     const id = this.$route.params.id 
-    this.channelId = id
-    this.address = await this.$getDefaultAccount()
+    this.channelId = id    
     this.ciBadge = new this.$web3.eth.Contract(this.$config.BADGE_ABI, this.$config.BADGE_CA)
+    this.ciYoutudy = new this.$web3.eth.Contract(this.$config.YOUTUDY_ABI, this.$config.YOUTUDY_CA)
     
     await this.getData(id)
   },
@@ -139,16 +145,31 @@ export default {
       this.getVideo(video_id)
     },
 
-    actionRegister() {
-      this.snackbar = true
-      this.msgTxt = '참여가 완료되었습니다.'
+    async actionRegister() {
+      try {
+        const courseId = 1
+        const amtToPay = 1
+        await this.ciYoutudy.methods.startCourse(courseId)
+        .send({from: this.address, gas: this.$config.GAS_AMOUNT, value: amtToPay})
+          .on('transactionHash', (transactionHash) => {
+            this.snackbar = true
+            this.msgTxt = 'Completed to join tx:'+transactionHash
+          })      
+          .on('error', (error, receipt) => {
+            console.error(error)            
+          });        
+      } catch (e) {
+        console.error(e)
+      }
 
       this.$router.push('/my-course')
+      
     },
 
     async getBadge() {
       const badgeName = `${this.channelId}_${this.channelTitle.substring(0, 8).replace(/\s+/g, '')}`
       console.log(badgeName)
+      this.badgeMsg = badgeName
       
       try {
         this.isLoading = true
@@ -157,13 +178,15 @@ export default {
         .send({from: this.address, gas: this.$config.GAS_AMOUNT})
         .on('transactionHash', (transactionHash) => {
           this.isLoading = false        
-          alert("Creation completed...! tx:"+transactionHash)
+          this.hasBadge = true
+          alert("Creation completed...! tx:"+transactionHash)          
         })
         .on('error', (error, receipt) => {
           this.isLoading = false
           alert(error)
         });
       } catch (e) {
+        this.hasBadge = false
         this.isLoading = false
       }
     }

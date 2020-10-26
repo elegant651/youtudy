@@ -75,6 +75,12 @@
       <v-toolbar-title><div class="logo"><router-link class="btnMenu" to="/">Youtudy</router-link></div></v-toolbar-title>
       <v-spacer></v-spacer>
       
+      <template v-if="address!=''">
+        <div class="balance">{{parseFloat(balance).toFixed(4)}} Matic</div>
+      </template>
+      <template v-else>
+        <v-btn outlined @click="connect">Connect to Wallet</v-btn>
+      </template>
       
       <!-- <v-btn outlined @click="goToProfile">학습 진행</v-btn> -->
     </v-app-bar>
@@ -109,9 +115,14 @@
       ]      
     }),
     computed: {
-      ...mapState([
-        'isConnected',        
-        'profile'
+      ...mapState([        
+        'profile',
+        'isConnected'
+      ]),
+
+      ...mapState('wallet', [        
+        'address',
+        'balance'
       ]),
 
       nickname () {        
@@ -121,12 +132,36 @@
       getProfileImg () {
         return (this.profile) ? getIdenticon(this.profile.name) : ''
       }
-    },    
+    },
+    created () {
+      this.connect()      
+    },
 
     methods: {
-      ...mapMutations([        
-        'setIsConnected'        
+      ...mapMutations('wallet', [ 
+        'setAddress',
+        'setBalance'
       ]),
+
+      async connect () {
+        try {
+          if (window.ethereum) {
+            // const accounts = await ethereum.enable()
+            const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
+
+            const account = accounts[0]
+            this.setAddress(account)
+            // this.setIsConnected(true)
+
+            const balanceWei = await this.$web3.eth.getBalance(account)
+            const balance = this.$web3.utils.fromWei(balanceWei, 'ether')
+            this.setBalance(balance)
+          }          
+        } catch(error) {
+          console.error(error)
+          location.reload()
+        }
+      },
       
       logout () {
         firebase.auth().signOut().then(() => {

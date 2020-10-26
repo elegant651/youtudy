@@ -30,7 +30,7 @@
         <v-flex v-for="video in videos1" :key="video.id" xs6 md4>
           <v-card class="cardVideo">
             <v-img :src="video.thumbnails.medium.url" width="150" />
-            <div>{{video.title}}</div>
+            <div>{{video.title.substring(0,30)}}</div>
           </v-card> 
         </v-flex>
       </v-layout>
@@ -46,7 +46,7 @@
         <v-flex v-for="video in videos2" :key="video.id" xs6 md4>
           <v-card class="cardVideo">
             <v-img :src="video.thumbnails.medium.url" width="150" />
-            <div>{{video.title}}</div>
+            <div>{{video.title.substring(0,30)}}</div>
           </v-card>
         </v-flex>
       </v-layout>
@@ -62,7 +62,7 @@
         <v-flex v-for="video in videos3" :key="video.id" xs6 md4>
           <v-card class="cardVideo">
             <v-img :src="video.thumbnails.medium.url" width="150" />
-            <div>{{video.title}}</div>
+            <div>{{video.title.substring(0,30)}}</div>
           </v-card>
         </v-flex>
       </v-layout>
@@ -78,7 +78,7 @@
         <v-flex v-for="video in videos4" :key="video.id" xs6 md4>
           <v-card class="cardVideo">
             <v-img :src="video.thumbnails.medium.url" width="150" />
-            <div>{{video.title}}</div>
+            <div>{{video.title.substring(0,30)}}</div>
           </v-card>
         </v-flex>
       </v-layout>
@@ -121,6 +121,7 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 import firebase from "firebase"
 import RegisterVideo from '@/components/register/RegisterVideo'
 
@@ -140,8 +141,7 @@ export default {
     videos2: [],
     videos3: [],
     videos4: [],
-
-    address: null,
+    
     ciYoutudy: null
   }),
 
@@ -149,9 +149,14 @@ export default {
     RegisterVideo
   },
 
-  async mounted() {
-    this.address = await this.$getDefaultAccount()
+  async mounted() {    
     this.ciYoutudy = new this.$web3.eth.Contract(this.$config.YOUTUDY_ABI, this.$config.YOUTUDY_CA)
+  },
+
+  computed: {
+    ...mapState('wallet', [
+      'address'
+    ]),
   },
 
   methods: {
@@ -243,33 +248,32 @@ export default {
 
       try {
         const price = 1
-        await this.ciYoutudy.methods.createCourse(this.title, schedule, price)
+        await this.ciYoutudy.methods.createCourse(this.ttitle, this.category, price)
         .send({from: this.address, gas: this.$config.GAS_AMOUNT})
-          .on('transactionHash', (transactionHash) => {            
+          .on('transactionHash', async (transactionHash) => {            
             console.log("Creation completed...! tx:"+transactionHash)
+
+            await db.collection("public_courses").add({
+              title: this.ttitle,
+              category: this.category,
+              register_id: 'register_id',
+              register_name: 'cherryboy',
+              registered_at: new Date(),
+              thumbnail: this.videos1[0].thumbnails.medium.url,
+              firstVideoId: this.videos1[0].id,
+              schedule
+            })
+
+            this.isLoading = false
+
+            this.$router.push('/')
           })      
           .on('error', (error, receipt) => {
             console.error(error)            
           });
       } catch (e) {
-        conso.error(e)
-      }
-      
-
-      await db.collection("public_courses").add({
-        title: this.ttitle,
-        category: this.category,
-        register_id: 'register_id',
-        register_name: 'cherryboy',
-        registered_at: new Date(),
-        thumbnail: this.videos1[0].thumbnails.medium.url,
-        firstVideoId: this.videos1[0].id,
-        schedule
-      })
-
-      this.isLoading = false
-
-      this.$router.push('/')
+        console.error(e)
+      }      
     },
 
     getStrSize (index) {
