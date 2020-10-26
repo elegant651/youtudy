@@ -6,9 +6,7 @@ It is a service that allows you to create a learning curriculum with YouTube vid
 ```
 
 ## Demo video
-```
 [demo link](https://youtu.be/T9GIlOiJ4O8)
-```
 
 ## Utilization
 ![utilization_img](./utilization.png)
