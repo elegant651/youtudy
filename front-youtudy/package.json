@@ -21,7 +21,7 @@
     "vue-axios": "^2.1.4",
     "vue-router": "^3.2.0",
     "vue-youtube-embed": "^2.2.2",
-    "vuetify": "^2.2.11",
+    "vuetify": "^2.6.10",
     "vuex": "^3.4.0",
     "web3": "^1.2.9",
     "youtube-search": "^1.1.4"
